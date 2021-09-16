@@ -233,6 +233,23 @@ public class MainPageObject {
        }
     }
 
+    public void tryClickElementWithWaitElement(String locator, String locator_to_wait, String error_message, int amount_of_attempts) {
+        int current_attempts = 0;
+
+        By wait_element = getLocatorByString(locator_to_wait);
+
+        while (driver.findElements(wait_element).size() == 0) {
+            try {
+                this.waitForElementAndClick(locator, error_message, 1);
+            } catch (Exception e) {
+                if (current_attempts > amount_of_attempts) {
+                    this.waitForElementAndClick(locator, error_message, 1);
+                }
+            }
+            ++ current_attempts;
+        }
+    }
+
     public boolean isElementPresent(String locator) {
         return getAmountOfElements(locator) > 0;
     }

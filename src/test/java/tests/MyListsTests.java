@@ -84,6 +84,16 @@ public class MyListsTests extends CoreTestCase {
             ArticlePageObject.addArticleToMySaved();
         }
 
+        if (Platform.getInstance().isMw()) {
+            AuthorizationPageObject AuthorizationPageObject = new AuthorizationPageObject(driver);
+            AuthorizationPageObject.clickAuthButton();
+            AuthorizationPageObject.enterLoginData(login, password);
+            AuthorizationPageObject.clickSubmitForm();
+
+            ArticlePageObject.waitForTitleElement();
+            assertEquals("We are not on the same page after login", article_title_for_save, ArticlePageObject.getArticleTitle());
+        }
+
         ArticlePageObject.closeArticle();
 
         //Adding second article to list
@@ -105,13 +115,14 @@ public class MyListsTests extends CoreTestCase {
         //Deleting article from list
 
         NavigationUI NavigationUI = NavigationUIFactory.get(driver);
+        NavigationUI.openNavigation();
         NavigationUI.clickMyLists();
 
         MyListsPageObject MyListsPageObject = MyListsPageObjectFactory.get(driver);
 
         if (Platform.getInstance().isAndroid()) {
             MyListsPageObject.openFolderByName(name_of_folder);
-        } else {
+        } else if (Platform.getInstance().isIOS()) {
             MyListsPageObject.closeInformationPopup();
         }
 
@@ -120,7 +131,7 @@ public class MyListsTests extends CoreTestCase {
         int amount_of_articles = MyListsPageObject.getAmountOfArticlesInList();
         assertEquals("We see unexpected count of article after deleting", 1, amount_of_articles);
 
-        if (Platform.getInstance().isAndroid()) {
+        if (Platform.getInstance().isAndroid() || Platform.getInstance().isMw()) {
             MyListsPageObject.openArticleFromList();
             String article_title = ArticlePageObject.getArticleTitle();
             assertEquals("We see unexpected title", article_title_for_save, article_title);

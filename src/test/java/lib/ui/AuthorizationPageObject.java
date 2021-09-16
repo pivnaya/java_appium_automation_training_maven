@@ -7,13 +7,15 @@ public class AuthorizationPageObject extends MainPageObject {
             LOGIN_BUTTON = "xpath://a[text()='Log in']",
             LOGIN_INPUT ="css:input[name='wpName']",
             PASSWORD_INPUT = "css:input[name='wpPassword']",
-            SUBMIT_BUTTON = "css:button#wpLoginAttempt";
+            SUBMIT_BUTTON = "css:button#wpLoginAttempt",
+            AUTH_POPUP = "css:div.drawer.visible";
 
     public AuthorizationPageObject(RemoteWebDriver driver) {
         super(driver);
     }
 
     public void clickAuthButton() {
+        this.waitForElementPresent(AUTH_POPUP, "Cannot find auth popup", 5);
         this.waitForElementAndClick(LOGIN_BUTTON, "Cannot find and click auth button", 5);
     }
 

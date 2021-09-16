@@ -10,7 +10,8 @@ abstract public class MyListsPageObject extends MainPageObject{
             ARTICLE_ELEMENT,
             CLOSE_INFORM_POPUP,
             ARTICLE_BY_TITLE_AND_DESCRIPTION_TPL,
-            REMOVE_FROM_SAVED_BUTTON_TPL;
+            REMOVE_FROM_SAVED_BUTTON_TPL,
+            ADD_TO_SAVED_BUTTON;
 
     public MyListsPageObject(RemoteWebDriver driver) {
         super(driver);
@@ -67,7 +68,8 @@ abstract public class MyListsPageObject extends MainPageObject{
             }
         } else {
             String remove_locator = getRemoveButtonByTitle(article_title);
-            this.waitForElementAndClick(remove_locator, "Cannot click button to remove article from saved", 10);
+
+            this.tryClickElementWithWaitElement(remove_locator, ADD_TO_SAVED_BUTTON, "Cannot find article with unwatched star", 5);
 
             driver.navigate().refresh();
         }
