@@ -1,5 +1,6 @@
 package lib.ui;
 
+import io.qameta.allure.Step;
 import lib.Platform;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -28,12 +29,15 @@ abstract public class ArticlePageObject extends  MainPageObject{
     }
     /* TEMPLATES METHODS */
 
+    @Step("Waiting for title on the article page")
     public WebElement waitForTitleElement() {
         return this.waitForElementPresent(TITLE, "Cannot find article title", 15);
     }
 
+    @Step("Getting article title")
     public String getArticleTitle() {
         WebElement title_element = waitForTitleElement();
+        screenshot(this.takeScreenshot("article_title"));
         if (Platform.getInstance().isAndroid()) {
             return title_element.getAttribute("text");
         } else {
@@ -41,6 +45,7 @@ abstract public class ArticlePageObject extends  MainPageObject{
         }
     }
 
+    @Step("Swiping to footer on article page")
     public void swipeToFooter() {
         if (Platform.getInstance().isAndroid()) {
             this.swipeUpToFindElement(FOOTER_ELEMENT,"Cannot find the end of the article",40);
@@ -51,6 +56,7 @@ abstract public class ArticlePageObject extends  MainPageObject{
         }
     }
 
+    @Step("Adding the article to new list")
     public void addArticleToNewList(String name_of_folder) {
         this.waitForElementAndClick(OPTIONS_BUTTON, "Cannot find button to open article options", 5);
         this.waitForElementAndClick(OPTIONS_ADD_TO_MY_LIST_BUTTON, "Cannot find option to add article to reading list", 5);
@@ -67,6 +73,7 @@ abstract public class ArticlePageObject extends  MainPageObject{
         this.waitForElementAndClick(folder_xpath, "Cannot find and click folder by name " + name_of_folder, 5);
     }
 
+    @Step("Adding the article to saved articles")
     public void addArticleToMySaved() {
         if (Platform.getInstance().isMw()) {
             this.removeArticleFromSavedIfItAdded();
@@ -74,6 +81,7 @@ abstract public class ArticlePageObject extends  MainPageObject{
         this.waitForElementAndClick(OPTIONS_ADD_TO_MY_LIST_BUTTON, "Cannot find and click option to add article to reading list", 5);
     }
 
+    @Step("Removing the article from saved if it has been added")
     public void removeArticleFromSavedIfItAdded() {
         if (this.isElementPresent(OPTIONS_REMOVE_MY_LIST_BUTTON)) {
             this.waitForElementAndClick(OPTIONS_REMOVE_MY_LIST_BUTTON, "Cannot click button to remove an article from saved", 5);
@@ -81,6 +89,7 @@ abstract public class ArticlePageObject extends  MainPageObject{
         this.waitForElementPresent(OPTIONS_ADD_TO_MY_LIST_BUTTON, "Cannot to find button to saved list after removing it from this list before", 5);
     }
 
+    @Step("Closing the article")
     public void closeArticle() {
         if (Platform.getInstance().isAndroid()) {
             this.waitForElementAndClick(CLOSE_ARTICLE_BUTTON, "Cannot close article, cannot find X link",5);

@@ -4,6 +4,7 @@ import lib.CoreTestCase;
 import lib.Platform;
 import lib.ui.SearchPageObject;
 import lib.ui.factories.SearchPageObjectFactory;
+import org.junit.Assert;
 import org.junit.Test;
 
 public class SearchTests extends CoreTestCase {
@@ -36,7 +37,7 @@ public class SearchTests extends CoreTestCase {
 
         int amount_of_search_results = SearchPageObject.getAmountOfFoundArticles();
 
-        assertTrue("Count of articles less than 2", amount_of_search_results > 1);
+        Assert.assertTrue("Count of articles less than 2", amount_of_search_results > 1);
 
         SearchPageObject.clickCancelSearch();
         SearchPageObject.waitForSearchResultDisappear();
@@ -65,7 +66,7 @@ public class SearchTests extends CoreTestCase {
         int amount_of_search_results = SearchPageObject.getAmountOfFoundArticles();
         int amount_of_search_results_with_value = SearchPageObject.getAmountOfFoundArticlesWithSubstringContains(search_line);
 
-        assertEquals("Not all items contains search value", amount_of_search_results, amount_of_search_results_with_value);
+        Assert.assertEquals("Not all items contains search value", amount_of_search_results, amount_of_search_results_with_value);
     }
 
     @Test
@@ -96,7 +97,7 @@ public class SearchTests extends CoreTestCase {
 
         int amount_of_search_results = SearchPageObject.getAmountOfFoundArticles();
 
-        assertTrue("We found too few results!",amount_of_search_results > 0);
+        Assert.assertTrue("We found too few results!",amount_of_search_results > 0);
     }
 
     @Test

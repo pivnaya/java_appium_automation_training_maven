@@ -7,6 +7,7 @@ import lib.ui.factories.ArticlePageObjectFactory;
 import lib.ui.factories.MyListsPageObjectFactory;
 import lib.ui.factories.NavigationUIFactory;
 import lib.ui.factories.SearchPageObjectFactory;
+import org.junit.Assert;
 import org.junit.Test;
 
 public class MyListsTests extends CoreTestCase {
@@ -40,7 +41,7 @@ public class MyListsTests extends CoreTestCase {
             AuthorizationPageObject.clickSubmitForm();
 
             ArticlePageObject.waitForTitleElement();
-            assertEquals("We are not on the same page after login", article_title, ArticlePageObject.getArticleTitle());
+            Assert.assertEquals("We are not on the same page after login", article_title, ArticlePageObject.getArticleTitle());
         }
 
         ArticlePageObject.closeArticle();
@@ -91,7 +92,7 @@ public class MyListsTests extends CoreTestCase {
             AuthorizationPageObject.clickSubmitForm();
 
             ArticlePageObject.waitForTitleElement();
-            assertEquals("We are not on the same page after login", article_title_for_save, ArticlePageObject.getArticleTitle());
+            Assert.assertEquals("We are not on the same page after login", article_title_for_save, ArticlePageObject.getArticleTitle());
         }
 
         ArticlePageObject.closeArticle();
@@ -129,12 +130,12 @@ public class MyListsTests extends CoreTestCase {
         MyListsPageObject.swipeByArticleToDelete(article_title_for_delete);
 
         int amount_of_articles = MyListsPageObject.getAmountOfArticlesInList();
-        assertEquals("We see unexpected count of article after deleting", 1, amount_of_articles);
+        Assert.assertEquals("We see unexpected count of article after deleting", 1, amount_of_articles);
 
         if (Platform.getInstance().isAndroid() || Platform.getInstance().isMw()) {
             MyListsPageObject.openArticleFromList();
             String article_title = ArticlePageObject.getArticleTitle();
-            assertEquals("We see unexpected title", article_title_for_save, article_title);
+            Assert.assertEquals("We see unexpected title", article_title_for_save, article_title);
         } else {
             MyListsPageObject.assertArticlePresentInList(article_title_for_save, article_description_for_save);
         }
