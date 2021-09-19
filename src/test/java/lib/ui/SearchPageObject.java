@@ -70,11 +70,13 @@ abstract public class SearchPageObject extends MainPageObject {
         this.waitForElementPresent(search_result_xpath, "Cannot find search result with substring " + substring, 15);
     }
 
+    @Step("Waiting for search result by title '{title}' and description '{description}'")
     public void waitForSearchResultByTitleAndDescription(String title, String description) {
         String search_result_xpath = getResultSearchElementByTitleAndDescription(title, description);
         this.waitForElementPresent(search_result_xpath, "Cannot find search result with title " + title + " and description " + description, 15);
     }
 
+    @Step("Waiting for search result disappear")
     public void waitForSearchResultDisappear() {
         this.waitForElementNotPresent(SEARCH_RESULT_ELEMENT, "Search result is still present", 15);
     }
@@ -91,6 +93,7 @@ abstract public class SearchPageObject extends MainPageObject {
         return getAmountOfElements(SEARCH_RESULT_ELEMENT);
     }
 
+    @Step("Getting amount of articles with substring '{substring}'")
     public int getAmountOfFoundArticlesWithSubstringContains(String substring) {
         this.waitForElementPresent(SEARCH_RESULT_ELEMENT, "Cannot find anything by the request", 15);
         String search_result_xpath = getResultSearchElementWithSubstringContains(substring);
@@ -107,6 +110,7 @@ abstract public class SearchPageObject extends MainPageObject {
         this.assertElementNotPresent(SEARCH_RESULT_ELEMENT, "We supposed not to find any results");
     }
 
+    @Step("Making sure searh input has text '{text}'")
     public void assertSearchInputTextEquals(String text) {
         if (Platform.getInstance().isMw()) {
             WebElement element = waitForElementPresent(SEARCH_INIT_ELEMENT_TEXT, "Cannot find search input element", 15);

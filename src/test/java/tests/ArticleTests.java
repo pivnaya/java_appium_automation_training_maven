@@ -14,6 +14,11 @@ import org.junit.Test;
 public class ArticleTests extends CoreTestCase {
 
     @Test
+    @Features(value = {@Feature(value="Search"),@Feature(value="Article")})
+    @DisplayName("Check article has title")
+    @Description("We open 'Java Object-oriented programming language' article and make sure the article has title")
+    @Step("Starting test testAssertTitle")
+    @Severity(value = SeverityLevel.CRITICAL)
     public void testAssertTitle() {
         SearchPageObject SearchPageObject = SearchPageObjectFactory.get(driver);
 

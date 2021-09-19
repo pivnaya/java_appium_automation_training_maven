@@ -1,5 +1,7 @@
 package tests;
 
+import io.qameta.allure.*;
+import io.qameta.allure.junit4.DisplayName;
 import lib.CoreTestCase;
 import lib.Platform;
 import lib.ui.*;
@@ -10,6 +12,7 @@ import lib.ui.factories.SearchPageObjectFactory;
 import org.junit.Assert;
 import org.junit.Test;
 
+@Epic("Tests for lists")
 public class MyListsTests extends CoreTestCase {
     private static final String name_of_folder = "Learning programming";
     private static final String
@@ -17,6 +20,11 @@ public class MyListsTests extends CoreTestCase {
             password = "pivnayapivnaya";
 
     @Test
+    @Features(value = {@Feature(value="Search"),@Feature(value="Article"),@Feature(value="Lists")})
+    @DisplayName("Save and delete article from list")
+    @Description("We open article, save it to the list, open this list and delete article from it")
+    @Step("Starting test testSaveFirstArticleToMyList")
+    @Severity(value = SeverityLevel.NORMAL)
     public void testSaveFirstArticleToMyList() {
         SearchPageObject SearchPageObject = SearchPageObjectFactory.get(driver);
 
@@ -61,6 +69,11 @@ public class MyListsTests extends CoreTestCase {
     }
 
     @Test
+    @Features(value = {@Feature(value="Search"),@Feature(value="Article"),@Feature(value="Lists")})
+    @DisplayName("Delete one of two articles from the list")
+    @Description("We save two articles to the list, open this list and delete one of articles from it")
+    @Step("Starting test testSaveTwoArticlesToMyList")
+    @Severity(value = SeverityLevel.NORMAL)
     public void testSaveTwoArticlesToMyList() {
         String search_line = "Java";
         String article_title_for_save = "JavaScript";

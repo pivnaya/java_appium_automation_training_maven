@@ -1,5 +1,7 @@
 package tests;
 
+import io.qameta.allure.*;
+import io.qameta.allure.junit4.DisplayName;
 import lib.CoreTestCase;
 import lib.Platform;
 import lib.ui.SearchPageObject;
@@ -7,9 +9,15 @@ import lib.ui.factories.SearchPageObjectFactory;
 import org.junit.Assert;
 import org.junit.Test;
 
+@Epic("Tests for search")
 public class SearchTests extends CoreTestCase {
 
     @Test
+    @Features(value = {@Feature(value="Search"),@Feature(value="Article")})
+    @DisplayName("Check search result has description of article")
+    @Description("We search 'Java' and make sure that search result has 'Java Object-oriented programming language' substring")
+    @Step("Starting test testSearch")
+    @Severity(value = SeverityLevel.NORMAL)
     public void testSearch() {
         SearchPageObject SearchPageObject = SearchPageObjectFactory.get(driver);
 
@@ -19,6 +27,11 @@ public class SearchTests extends CoreTestCase {
     }
 
     @Test
+    @Features(value = {@Feature(value="Search")})
+    @DisplayName("Cancel search")
+    @Description("We init search and cancel it")
+    @Step("Starting test testCancelSearch")
+    @Severity(value = SeverityLevel.NORMAL)
     public void testCancelSearch() {
         SearchPageObject SearchPageObject = SearchPageObjectFactory.get(driver);
 
@@ -29,6 +42,11 @@ public class SearchTests extends CoreTestCase {
     }
 
     @Test
+    @Features(value = {@Feature(value="Search"),@Feature(value="Article")})
+    @DisplayName("Cancel search result")
+    @Description("We search 'Java' article and cancel search result")
+    @Step("Starting test testCancelSearchResult")
+    @Severity(value = SeverityLevel.NORMAL)
     public void testCancelSearchResult() throws InterruptedException {
         SearchPageObject SearchPageObject = SearchPageObjectFactory.get(driver);
 
@@ -44,6 +62,11 @@ public class SearchTests extends CoreTestCase {
     }
 
     @Test
+    @Features(value = {@Feature(value="Search")})
+    @DisplayName("Check search input has placeholder")
+    @Description("We init search and make sure the input has 'Search Wikipedia' placeholder")
+    @Step("Starting test testCompareSearchInputText")
+    @Severity(value = SeverityLevel.MINOR)
     public void testCompareSearchInputText() {
         SearchPageObject SearchPageObject = SearchPageObjectFactory.get(driver);
 
@@ -55,6 +78,11 @@ public class SearchTests extends CoreTestCase {
     }
 
     @Test
+    @Features(value = {@Feature(value="Search"),@Feature(value="Article")})
+    @DisplayName("Check search result has search line")
+    @Description("We search 'Java' and make sure that all articles has 'Java' text")
+    @Step("Starting test testCompareSearchResult")
+    @Severity(value = SeverityLevel.NORMAL)
     public void testCompareSearchResult() {
         SearchPageObject SearchPageObject = SearchPageObjectFactory.get(driver);
 
@@ -70,6 +98,11 @@ public class SearchTests extends CoreTestCase {
     }
 
     @Test
+    @Features(value = {@Feature(value="Search"),@Feature(value="Article")})
+    @DisplayName("Compare articles in search result with expected")
+    @Description("We search 'Java' and compare three article titles and descriptions in search result")
+    @Step("Starting test testCompareArticlesInSearchResult")
+    @Severity(value = SeverityLevel.CRITICAL)
     public void testCompareArticlesInSearchResult() {
         SearchPageObject SearchPageObject = SearchPageObjectFactory.get(driver);
 
@@ -88,6 +121,11 @@ public class SearchTests extends CoreTestCase {
     }
 
     @Test
+    @Features(value = {@Feature(value="Search")})
+    @DisplayName("Check not empty search result")
+    @Description("We search 'Linkin Park Discography' and make sure that search result not empty")
+    @Step("Starting test testAmountOfNotEmptySearch")
+    @Severity(value = SeverityLevel.NORMAL)
     public void testAmountOfNotEmptySearch() {
         SearchPageObject SearchPageObject = SearchPageObjectFactory.get(driver);
 
@@ -101,6 +139,11 @@ public class SearchTests extends CoreTestCase {
     }
 
     @Test
+    @Features(value = {@Feature(value="Search")})
+    @DisplayName("Check empty search result")
+    @Description("We search non-existent request and make sure that search result is empty")
+    @Step("Starting test testAmountOfEmptySearch")
+    @Severity(value = SeverityLevel.MINOR)
     public void testAmountOfEmptySearch() {
         SearchPageObject SearchPageObject = SearchPageObjectFactory.get(driver);
 

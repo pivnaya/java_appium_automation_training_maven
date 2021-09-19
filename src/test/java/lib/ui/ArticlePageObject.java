@@ -66,6 +66,7 @@ abstract public class ArticlePageObject extends  MainPageObject{
         this.waitForElementAndClick(MY_LIST_OK_BUTTON, "Cannot press OK button", 5);
     }
 
+    @Step("Adding the article to '{name_of_folder}' list")
     public void addArticleToList(String name_of_folder) {
         this.waitForElementAndClick(OPTIONS_BUTTON, "Cannot find button to open article options", 5);
         this.waitForElementAndClick(OPTIONS_ADD_TO_MY_LIST_BUTTON, "Cannot find option to add article to reading list", 5);
@@ -100,6 +101,7 @@ abstract public class ArticlePageObject extends  MainPageObject{
         }
     }
 
+    @Step("Making sure article has title")
     public void assertArticleHasTitle() {
         this.assertElementPresent(TITLE, "Cannot find article title");
     }
